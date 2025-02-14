@@ -4,3 +4,9 @@
 MNIST
 test*
 wandb
+data/*
+*.pt
+config-*.yaml
+sulcalgraphs/*
+data.zip
+*.ipynb

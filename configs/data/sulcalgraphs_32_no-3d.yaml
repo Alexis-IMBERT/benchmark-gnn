@@ -1,0 +1,42 @@
+data:
+  class_path: datasets.utils.MyLightningDataset
+  init_args:
+    train_dataset:
+      class_path: datasets.sulcalgraphs.SulcalGraphs
+      init_args:
+        root: [[temp_dir]]
+        csv_path: data/sulcalgraphs.csv
+        node_attrs:
+          - basin_area
+          - basin_mean_thickness
+          - pit_depth
+          - pit_thickness
+          - basin_int_curvature
+        split: train
+    val_dataset:
+      class_path: datasets.sulcalgraphs.SulcalGraphs
+      init_args:
+        root: [[temp_dir]]
+        csv_path: data/sulcalgraphs.csv
+        node_attrs:
+          - basin_area
+          - basin_mean_thickness
+          - pit_depth
+          - pit_thickness
+          - basin_int_curvature
+        split: val
+    test_dataset:
+      class_path: datasets.sulcalgraphs.SulcalGraphs
+      init_args:
+        root: [[temp_dir]]
+        csv_path: data/sulcalgraphs.csv
+        node_attrs:
+          - basin_area
+          - basin_mean_thickness
+          - pit_depth
+          - pit_thickness
+          - basin_int_curvature
+        split: test
+    num_workers: 64
+    batch_size: 32
+    pin_memory: true

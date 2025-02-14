@@ -1,0 +1,8 @@
+model:
+  class_path: models.lightning.GraphLitModel
+  init_args:
+    name: TOPK_B${data.init_args.batch_size}_add-pool_[[features]]
+    module:
+      class_path: models.pooling_experiments.MyGCNTopKPool
+    loss_fn:
+      class_path: torch.nn.CrossEntropyLoss

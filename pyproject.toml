@@ -3,15 +3,27 @@ name = "brain-gnn"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = "==3.12.7"
 dependencies = [
+    "bitsandbytes==0.42.0",
+    "joblib>=1.4.2",
+    "networkx>=3.4.2",
+    "omegaconf>=2.3.0",
+    "pandas>=2.2.3",
     "pytorch-lightning[extra]>=2.4.0",
     "torch-geometric>=2.6.1",
+    "torcheval>=0.0.7",
     "torchvision>=0.20.1",
     "wandb>=0.19.1",
 ]
 
+[project.optional-dependencies]
+jupyter = [
+    "ipykernel>=6.29.5",
+]
+
 [dependency-groups]
 dev = [
+    "pre-commit>=4.0.1",
     "ruff>=0.8.3",
 ]
