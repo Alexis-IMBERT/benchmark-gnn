@@ -1,0 +1,3 @@
+trainer:
+  # for dev run
+  fast_dev_run: true

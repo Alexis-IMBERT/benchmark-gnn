@@ -1,0 +1,23 @@
+model:
+  class_path: models.lightning.GraphLitModel
+  init_args:
+    name: GrapheSAGE_B${data.init_args.batch_size}_L4_H64_[[features]]
+    module:
+      class_path: torch_geometric.nn.Sequential
+      init_args:
+        input_args: x, edge_index, batch
+        modules:
+          - - class_path: torch_geometric.nn.models.GraphSAGE
+              init_args:
+                in_channels: -1
+                hidden_channels: 64
+                num_layers: 4
+                out_channels: 2
+                dropout: 0.2
+                act: relu
+            - x, edge_index, batch -> x
+          - - class_path: models.utils.my_global_mean_pool
+            - x, batch -> x
+    learning_rate: 1e-3
+    loss_fn:
+      class_path: torch.nn.CrossEntropyLoss

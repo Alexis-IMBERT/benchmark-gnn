@@ -1,0 +1,23 @@
+model:
+  class_path: models.lightning.GraphLitModel
+  init_args:
+    name: GCN_B${data.init_args.batch_size}_L8_H128_[[features]]
+    module:
+      class_path: torch_geometric.nn.Sequential
+      init_args:
+        input_args: x, edge_index, batch
+        modules:
+          - - class_path: torch_geometric.nn.GCN
+              init_args:
+                in_channels: -1
+                out_channels: 2
+                hidden_channels: 128
+                num_layers: 8
+                act: relu
+                dropout: 0.2
+            - x, edge_index -> x
+          - - class_path: models.utils.my_global_mean_pool
+            - x, batch -> x
+
+    loss_fn:
+      class_path: torch.nn.CrossEntropyLoss

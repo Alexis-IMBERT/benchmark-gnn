@@ -1,0 +1,20 @@
+model:
+  class_path: models.lightning.GraphLitModel
+  init_args:
+    name: MIVS_B${data.init_args.batch_size}_lr1e-4_[[features]]
+    module:
+      class_path: models.pooling_experiments.Net
+      init_args:
+        num_classes: 2
+        nb_blocks: 3
+        hidden_size: 64
+        dropout: 0.2
+        args_pool:
+          Score: models.pooling_experiments.GNNCosMulti
+          topk_complement: false
+          assign_method: models.pooling_experiments.winner_take_it_all
+          reduce_method: 'sum'
+          nb_proj: 4
+    loss_fn:
+      class_path: torch.nn.CrossEntropyLoss
+    learning_rate: 0.0001

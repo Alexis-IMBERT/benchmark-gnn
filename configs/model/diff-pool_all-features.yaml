@@ -1,0 +1,13 @@
+model:
+  class_path: models.lightning.GraphLitModel
+  init_args:
+    name: TOPK_B${data.init_args.batch_size}_add-pool_[[features]]
+    module:
+      class_path: models.pooling_experiments.DiffPoolClf
+      init_args:
+        input_channels: 8
+        hidden_channels: 64
+        num_nodes: 100
+        num_classes: 2
+    loss_fn:
+      class_path: torch.nn.CrossEntropyLoss

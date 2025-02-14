@@ -1,0 +1,6 @@
+lr_scheduler:
+  class_path: pytorch_lightning.cli.ReduceLROnPlateau
+  init_args:
+    monitor: val_loss
+    mode: min
+    patience: 10

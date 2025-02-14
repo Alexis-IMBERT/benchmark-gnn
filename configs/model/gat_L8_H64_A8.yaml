@@ -1,0 +1,25 @@
+model:
+  class_path: models.lightning.GraphLitModel
+  init_args:
+    name: GAT_B${data.init_args.batch_size}_L8_H64_A8_[[features]]
+    module:
+      class_path: torch_geometric.nn.Sequential
+      init_args:
+        input_args: x, edge_index, batch
+        modules:
+          - - class_path: torch_geometric.nn.models.GAT
+              init_args:
+                in_channels: -1
+                hidden_channels: 64
+                num_layers: 8
+                out_channels: 2
+                heads: 8
+                v2: false
+                dropout: 0.2
+                act: relu
+            - x, edge_index, batch -> x
+          - - class_path: models.utils.my_global_mean_pool
+            - x, batch -> x
+
+    loss_fn:
+      class_path: torch.nn.CrossEntropyLoss
